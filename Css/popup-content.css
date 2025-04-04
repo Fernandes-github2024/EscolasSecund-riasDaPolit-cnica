@@ -1,0 +1,190 @@
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease-in-out;
+    font-family: "Oswald", serif;
+}
+
+.popup.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup-content {
+    background-color: #ffffff;
+    padding: 80px 60px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 600px;
+    width: 80%;
+    animation: fadeIn 0.3s ease-in-out;
+    position: relative;
+}
+
+.popup-content h2 {
+    font-size: 2rem;
+    color: #6D1C2C;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.popup-content p {
+    font-size: 20px;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    font-weight: 380;
+}
+
+.popup-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.popup-buttons a {
+    padding: 15px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    transition: background-color 0.3s ease-in-out;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.popup-buttons .btn-download {
+    background-color: #6D1C2C;
+    font-weight: 550;
+}
+
+.popup-buttons .btn-download:hover {
+    background-color: #731638;
+}
+
+.btn-close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.popup-content button {
+    background-color: transparent;
+    border: none;
+}
+
+.btn-close i {
+    font-size: 2.5rem;
+    color: #6D1C2C;
+}
+
+.btn-close i:hover {
+    color: #731638;
+}
+
+@keyframes fadeIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Media Queries */
+
+/* Para telas menores que 768px */
+@media (max-width: 768px) {
+    .popup-content {
+        padding: 50px 40px;
+        max-width: 500px;
+    }
+
+    .popup-content h2 {
+        font-size: 1.8rem;
+    }
+
+    .popup-content p {
+        font-size: 18px;
+    }
+
+    .popup-buttons a {
+        padding: 12px 18px;
+        font-size: 0.9rem;
+    }
+
+    .btn-close i {
+        font-size: 2rem;
+    }
+}
+
+/* Para telas menores que 576px */
+@media (max-width: 576px) {
+    .popup-content {
+        padding: 40px 20px;
+        max-width: 90%;
+    }
+
+    .popup-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .popup-content p {
+        font-size: 16px;
+    }
+
+    .popup-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .popup-buttons a {
+        padding: 10px 15px;
+        font-size: 0.85rem;
+    }
+
+    .btn-close i {
+        font-size: 1.8rem;
+    }
+}
+
+/* Para telas menores que 400px */
+@media (max-width: 400px) {
+    .popup-content {
+        padding: 30px 15px;
+    }
+
+    .popup-content h2 {
+        font-size: 1.2rem;
+    }
+
+    .popup-content p {
+        font-size: 14px;
+    }
+
+    .popup-buttons a {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+
+    .btn-close i {
+        font-size: 1.5rem;
+    }
+}

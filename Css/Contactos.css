@@ -1,0 +1,375 @@
+.titulo_section {
+    width: 100%;
+    height: 200px;
+    background-color: #6D1C2C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.titulo {
+    width: 80%;
+    height: 100px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe Script', cursive;
+}
+
+.titulo h1 {
+    font-size: 42px;
+    color: #F2A25C;
+    letter-spacing: 1.5px;
+    text-align: center;
+}
+
+/* Estilo para a seção de contatos */
+
+
+.locations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.location-card {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    transition: all 0.3s ease;
+    border-top: 5px solid #6D1C2C;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.location-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.location-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background-color: rgba(242, 162, 92, 0.1);
+    border-radius: 0 0 0 100%;
+    z-index: 0;
+}
+
+.location-card h2 {
+    font-size: 26px;
+    color: #6D1C2C;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f2f2f2;
+    position: relative;
+}
+
+.location-card h2::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 80px;
+    height: 2px;
+    background-color: #F2A25C;
+}
+
+.contact-info {
+    position: relative;
+    z-index: 1;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 18px;
+}
+
+.contact-item:last-child {
+    margin-bottom: 0;
+}
+
+.contact-item i {
+    color: #F2A25C;
+    font-size: 18px;
+    margin-right: 15px;
+    min-width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.contact-item:hover i {
+    transform: scale(1.2);
+}
+
+.contact-item p {
+    color: #555;
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Estilos específicos para cada localização */
+.location-card:nth-child(1) {
+    border-top-color: #3498db;
+    /* Azul para Maputo */
+}
+
+.location-card:nth-child(2) {
+    border-top-color: #2ecc71;
+    /* Verde para Quelimane */
+    animation-delay: 0.1s;
+}
+
+.location-card:nth-child(3) {
+    border-top-color: #e74c3c;
+    /* Vermelho para Nampula */
+    animation-delay: 0.2s;
+}
+
+.location-card:nth-child(4) {
+    border-top-color: #f39c12;
+    /* Laranja para Nacala */
+    animation-delay: 0.3s;
+}
+
+.location-card:nth-child(5) {
+    border-top-color: #9b59b6;
+    /* Roxo para Tete */
+    animation-delay: 0.4s;
+}
+
+.location-card:nth-child(1) i {
+    color: #3498db;
+}
+
+.location-card:nth-child(2) i {
+    color: #2ecc71;
+}
+
+.location-card:nth-child(3) i {
+    color: #e74c3c;
+}
+
+.location-card:nth-child(4) i {
+    color: #f39c12;
+}
+
+.location-card:nth-child(5) i {
+    color: #9b59b6;
+}
+
+/* Media queries para responsividade */
+@media (max-width: 1024px) {
+    .locations-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+    }
+
+    .location-card {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .locations-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+    }
+
+    .location-card h2 {
+        font-size: 22px;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+    }
+
+    .contact-item i {
+        font-size: 16px;
+    }
+
+    .contact-item p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .locations-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .location-card {
+        padding: 20px;
+    }
+}
+
+/* Estilos para a introdução */
+.contact-intro {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.contact-intro h2 {
+    color: #6D1C2C;
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.contact-intro p {
+    color: #555;
+    font-size: 16px;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Estilos para a seção do mapa */
+.map-section {
+    margin-top: 60px;
+    animation: fadeInUp 1s ease-out;
+    animation-delay: 0.5s;
+    animation-fill-mode: both;
+}
+
+.map-section h2 {
+    color: #6D1C2C;
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.map-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* Proporção 16:9 para responsividade */
+    height: 0;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.map-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Media queries atualizadas */
+@media (max-width: 1024px) {
+    .contact-intro h2 {
+        font-size: 28px;
+    }
+
+    .map-section h2 {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-intro h2 {
+        font-size: 24px;
+    }
+
+    .contact-intro p {
+        font-size: 15px;
+    }
+
+    .map-section h2 {
+        font-size: 22px;
+    }
+
+    .map-section {
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-intro h2 {
+        font-size: 22px;
+    }
+
+    .contact-intro {
+        margin-bottom: 25px;
+    }
+
+    .map-section {
+        margin-top: 30px;
+    }
+
+    .map-section h2 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 380px) {
+    .location-card h2 {
+        font-size: 20px;
+    }
+
+    .contact-item {
+        font-size: 14px;
+    }
+}
+
+
+
+
+/* Medium screens */
+@media screen and (max-width: 1024px) {
+    .titulo h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Small screens */
+@media screen and (max-width: 768px) {
+    .titulo_section {
+        height: 150px;
+    }
+
+    .titulo {
+        height: 80px;
+    }
+
+    .titulo h1 {
+        font-size: 1.75rem;
+    }
+
+}
+
+/* Extra small screens */
+@media screen and (max-width: 480px) {
+    .titulo_section {
+        height: 120px;
+    }
+
+    .titulo h1 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Animações e Efeitos */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

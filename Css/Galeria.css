@@ -1,0 +1,339 @@
+.titulo_section {
+    width: 100%;
+    height: 200px;
+    background-color: #6D1C2C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.titulo {
+    width: 80%;
+    height: 100px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe Script', cursive;
+}
+
+
+.titulo h1 {
+    font-size: 2.5rem;
+    color: #F2A25C;
+    letter-spacing: 1.5px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilização da seção da galeria(Fotos) */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 48px;
+    padding: 48px;
+}
+
+.gallery-card {
+    background: #ffffff;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+
+.gallery-card:hover {
+    transform: translateY(-5px);
+}
+
+.gallery-card img {
+    width: 100%;
+    height: auto;
+}
+
+.card-content {
+    padding: 15px;
+    text-align: center;
+}
+
+.card-content h3 {
+    color: #F2A25C;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.card-content p {
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    color: #555;
+    line-height: 1.4;
+    margin-bottom: 18px;
+}
+
+/* Estilização do modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Conteúdo do modal */
+.modal-content {
+    display: block;
+    margin: 6% auto 55px auto;
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Legenda do modal */
+.caption {
+    text-align: center;
+    color: #fff;
+    margin-top: 15px;
+    font-size: 1.2rem;
+}
+
+/* Botão para fechar o modal */
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background-color: #6D1C2C;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    background-color: #731638;
+}
+
+
+
+.Quadro_content {
+    min-height: 52vh;
+}
+
+
+
+
+
+/* Medium screens */
+@media screen and (max-width: 1024px) {
+    .titulo h1 {
+        font-size: 2rem;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 32px;
+        padding: 32px;
+    }
+
+    .modal-content {
+        max-width: 90%;
+        margin: 10% auto;
+    }
+}
+
+/* Small screens */
+@media screen and (max-width: 768px) {
+    .titulo_section {
+        height: 150px;
+    }
+
+    .titulo {
+        height: 80px;
+    }
+
+    .titulo h1 {
+        font-size: 1.75rem;
+    }
+
+    .gallery {
+        gap: 24px;
+        padding: 24px;
+    }
+
+    .card-content h3 {
+        font-size: 1.25rem;
+    }
+
+    .card-content p {
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+    }
+
+    .modal-content {
+        max-width: 95%;
+        margin: 15% auto;
+    }
+
+    .caption {
+        font-size: 1rem;
+    }
+}
+
+/* Extra small screens */
+@media screen and (max-width: 480px) {
+    .titulo_section {
+        height: 120px;
+    }
+
+    .titulo h1 {
+        font-size: 1.5rem;
+    }
+
+    .gallery {
+        gap: 20px;
+        padding: 16px;
+    }
+
+    .close {
+        top: 10px;
+        right: 15px;
+        font-size: 1.25rem;
+    }
+}
+
+
+
+
+
+/* Estilização da seção da galeria(videos) */
+.video-section {
+    padding: 50px 20px;
+    background-color: #f4f4f4;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.construction-message {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.construction-message i {
+    font-size: 3rem;
+    color: #6D1C2C;
+    margin-bottom: 15px;
+}
+
+.construction-message h2 {
+    font-size: 2rem;
+    color: #6D1C2C;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.construction-message p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* Media Queries */
+
+/* Para telas menores que 768px */
+@media (max-width: 768px) {
+    .video-section {
+        padding: 40px 15px;
+    }
+
+    .construction-message {
+        padding: 25px;
+        max-width: 500px;
+    }
+
+    .construction-message i {
+        font-size: 2.5rem;
+    }
+
+    .construction-message h2 {
+        font-size: 1.8rem;
+    }
+
+    .construction-message p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Para telas menores que 576px */
+@media (max-width: 576px) {
+    .video-section {
+        padding: 30px 10px;
+    }
+
+    .construction-message {
+        padding: 20px;
+        max-width: 90%;
+    }
+
+    .construction-message i {
+        font-size: 2rem;
+    }
+
+    .construction-message h2 {
+        font-size: 1.5rem;
+    }
+
+    .construction-message p {
+        font-size: 0.85rem;
+    }
+}
+
+/* Para telas menores que 400px */
+@media (max-width: 400px) {
+    .construction-message {
+        padding: 15px;
+    }
+
+    .construction-message i {
+        font-size: 1.8rem;
+    }
+
+    .construction-message h2 {
+        font-size: 1.3rem;
+    }
+
+    .construction-message p {
+        font-size: 0.8rem;
+    }
+}

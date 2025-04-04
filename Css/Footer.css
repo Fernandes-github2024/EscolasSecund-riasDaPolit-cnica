@@ -1,0 +1,101 @@
+/* Estilos para o rodapé */
+.footer {
+    background-color: #6D1C2C;
+    /* Cor de fundo que combina com o bordô do logo */
+    color: white;
+    /* Cor do texto */
+    padding: 20px 0;
+    /* Espaçamento */
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    /* Ajuste automático para dispositivos menores */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* Alinhamento vertical para dispositivos menores */
+}
+
+/* Estilos para o conteúdo do rodapé */
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilos para o logo no rodapé */
+.footer-logo {
+    margin-bottom: 15px;
+}
+
+.footer-logo img {
+    max-height: 80px;
+    /* Ajuste a altura máxima conforme necessário */
+    width: auto;
+}
+
+.footer-content p {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+}
+
+
+/* Estilo para o link administrativo */
+.admin-link {
+    color: rgba(255, 255, 255, 0.5);
+    /* Texto semi-transparente */
+    font-size: 0.8rem;
+    text-decoration: none;
+    margin-top: 10px;
+    transition: color 0.3s ease;
+}
+
+.admin-link:hover {
+    color: rgba(255, 255, 255, 0.9);
+    /* Fica mais visível ao passar o mouse */
+}
+
+/* Ajuste para dispositivos menores */
+@media (max-width: 480px) {
+    .admin-link {
+        font-size: 0.7rem;
+    }
+}
+
+/* Responsividade para dispositivos menores */
+@media (max-width: 768px) {
+    .footer-content p {
+        font-size: 1rem;
+    }
+
+    .footer-content {
+        padding: 0 10px;
+    }
+
+    .footer-logo img {
+        max-height: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-content p {
+        font-size: 0.9rem;
+    }
+
+    .footer {
+        padding: 15px 0;
+    }
+
+    .footer-logo img {
+        max-height: 50px;
+    }
+}

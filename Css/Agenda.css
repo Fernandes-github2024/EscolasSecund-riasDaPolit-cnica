@@ -1,0 +1,726 @@
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0 40px 0;
+}
+
+/* =================== HEADER SECTION =================== */
+.titulo_section {
+    width: 100%;
+    height: 200px;
+    background-color: #6D1C2C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo {
+    width: 80%;
+    height: 100px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe Script', cursive;
+}
+
+.titulo h1 {
+    font-size: 42px;
+    color: #F2A25C;
+    letter-spacing: 1.5px;
+    text-align: center;
+}
+
+/* =================== AGENDA SECTION =================== */
+.agenda-section {
+    padding: 10px 0 30px 0;
+    background-color: white;
+}
+
+.agenda-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.agenda-header h2 {
+    font-size: 2.2rem;
+    color: #6D1C2C;
+    margin-bottom: 10px;
+}
+
+.agenda-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* =================== FILTER BUTTONS =================== */
+/* Escola Filter */
+.escola-filter {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.escola-btn {
+    padding: 10px 15px;
+    margin: 0 6px 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.escola-btn:hover {
+    border-color: #6D1C2C;
+    color: #6D1C2C;
+}
+
+.escola-btn.active {
+    background-color: #6D1C2C;
+    color: white;
+    border-color: #6D1C2C;
+}
+
+/* Agenda Filter (Event Types) */
+.agenda-filter {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 8px 20px;
+    margin: 0 8px 10px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    border-color: #6D1C2C;
+    color: #6D1C2C;
+}
+
+.filter-btn.active {
+    background-color: #6D1C2C;
+    color: white;
+    border-color: #6D1C2C;
+}
+
+/* =================== AGENDA ITEMS =================== */
+.agenda-list {
+    margin-bottom: 40px;
+}
+
+.agenda-item {
+    display: flex;
+    margin-bottom: 25px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.agenda-item:hover {
+    transform: translateY(-5px);
+}
+
+.agenda-date {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-width: 100px;
+    padding: 15px;
+    background-color: #6D1C2C;
+    color: white;
+    text-align: center;
+}
+
+.agenda-date .day {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.agenda-date .month {
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.agenda-content {
+    flex-grow: 1;
+    padding: 20px;
+    position: relative;
+}
+
+.agenda-content h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    position: relative;
+}
+
+.agenda-content h3::after {
+    content: attr(data-escola);
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 0.7rem;
+    color: #F2A25C;
+    font-weight: normal;
+}
+
+.agenda-details {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.agenda-details p {
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.agenda-details i {
+    margin-right: 5px;
+    color: #F2A25C;
+}
+
+.agenda-content .description {
+    margin-bottom: 15px;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.agenda-link {
+    background-color: transparent;
+    color: #6D1C2C;
+    border: 1px solid #6D1C2C;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.agenda-link:hover {
+    background-color: #6D1C2C;
+    color: white;
+}
+
+/* Event Type Colors */
+.agenda-item[data-type="academicos"] .agenda-date {
+    background-color: #3498db;
+}
+
+.agenda-item[data-type="culturais"] .agenda-date {
+    background-color: #e67e22;
+}
+
+.agenda-item[data-type="desportivos"] .agenda-date {
+    background-color: #2ecc71;
+}
+
+/* =================== CALENDAR BUTTON =================== */
+.agenda-calendar {
+    text-align: center;
+}
+
+.calendar-btn {
+    background-color: #F2A25C;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.calendar-btn i {
+    margin-left: 8px;
+}
+
+.calendar-btn:hover {
+    background-color: #e08f41;
+}
+
+/* =================== CALENDAR MODAL =================== */
+.calendar-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.calendar-modal.active {
+    display: flex;
+}
+
+.calendar-modal-content {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    width: 90%;
+    max-width: 1000px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #666;
+}
+
+.close-modal:hover {
+    color: #333;
+}
+
+.calendar-modal-content h2 {
+    text-align: center;
+    color: #6D1C2C;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+}
+
+/* Escola Select in Calendar */
+.calendario-escolas-filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendario-escolas-filter label {
+    margin-right: 10px;
+    font-weight: 500;
+}
+
+.calendario-escolas-filter select {
+    padding: 8px 15px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 0.9rem;
+    background-color: white;
+    cursor: pointer;
+}
+
+/* Calendar Controls */
+.calendar-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.calendar-controls h3 {
+    font-size: 1.4rem;
+    color: #333;
+}
+
+.calendar-nav-btn {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.calendar-nav-btn:hover {
+    background-color: #f0f0f0;
+}
+
+/* Calendar Container */
+.calendar-container {
+    margin-bottom: 30px;
+}
+
+.calendar-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.calendar-body {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    padding: 5px;
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.calendar-day:hover {
+    background-color: #f9f9f9;
+}
+
+.calendar-day.other-month {
+    opacity: 0.3;
+}
+
+.calendar-day.today {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.calendar-day.has-event {
+    border-color: #ddd;
+}
+
+.day-number {
+    font-size: 0.9rem;
+    margin-bottom: 3px;
+}
+
+.event-dots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+}
+
+.event-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-right: 2px;
+}
+
+/* Event Colors */
+.event-dot.academicos {
+    background-color: #3498db;
+}
+
+.event-dot.culturais {
+    background-color: #e67e22;
+}
+
+.event-dot.desportivos {
+    background-color: #2ecc71;
+}
+
+/* Calendar Legend */
+.calendar-legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin: 0 15px 10px;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.legend-color.academic {
+    background-color: #3498db;
+}
+
+.legend-color.cultural {
+    background-color: #e67e22;
+}
+
+.legend-color.sport {
+    background-color: #2ecc71;
+}
+
+/* Event List in Calendar */
+.event-list {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.event-list h3 {
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
+}
+
+.event-list ul {
+    list-style: none;
+}
+
+.event-list li {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-left: 4px solid #ddd;
+    background-color: white;
+    border-radius: 0 4px 4px 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.event-list li:hover {
+    transform: translateX(5px);
+}
+
+.event-item {
+    position: relative;
+}
+
+.event-item:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+}
+
+.event-item.academicos:before {
+    background-color: #3498db;
+}
+
+.event-item.culturais:before {
+    background-color: #e67e22;
+}
+
+.event-item.desportivos:before {
+    background-color: #2ecc71;
+}
+
+.event-date {
+    min-width: 50px;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.event-title {
+    flex-grow: 1;
+}
+
+/* =================== EVENT MODALS =================== */
+.event-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.event-modal.active {
+    display: flex;
+}
+
+.event-modal-content {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+}
+
+/* =================== RESPONSIVE STYLES =================== */
+
+@media (max-width: 768px) {
+
+    .agenda-item {
+        flex-direction: column;
+    }
+
+    .agenda-date {
+        width: 100%;
+        padding: 10px;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .agenda-date .day {
+        font-size: 24px;
+        margin-right: 5px;
+    }
+
+    .agenda-date .month {
+        font-size: 14px;
+    }
+
+    .escola-btn {
+        padding: 8px 12px;
+        font-size: 0.75rem;
+        margin: 0 4px 8px;
+    }
+
+    .calendario-escolas-filter {
+        flex-direction: column;
+    }
+
+    .calendario-escolas-filter label {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .calendar-header {
+        font-size: 0.8rem;
+    }
+
+    .day-number {
+        font-size: 0.8rem;
+    }
+
+    .calendar-modal-content {
+        padding: 20px 15px;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .agenda-header p {
+        font-size: 0.9rem;
+    }
+
+    .filter-btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+        margin: 0 4px 8px;
+    }
+
+    .calendar-controls h3 {
+        font-size: 1.2rem;
+    }
+
+    .legend-item {
+        margin: 0 8px 8px;
+        font-size: 0.8rem;
+    }
+
+    .event-date {
+        min-width: 40px;
+    }
+}
+
+/* Font Awesome Icons (if used) */
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.fa-clock-o:before {
+    content: "\f017";
+}
+
+.fa-map-marker:before {
+    content: "\f041";
+}
+
+.fa-calendar:before {
+    content: "\f073";
+}
+
+.fa-chevron-left:before {
+    content: "\f053";
+}
+
+.fa-chevron-right:before {
+    content: "\f054";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Medium screens */
+@media screen and (max-width: 1024px) {
+    .titulo h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Small screens */
+@media screen and (max-width: 768px) {
+    .titulo_section {
+        height: 150px;
+    }
+
+    .titulo {
+        height: 80px;
+    }
+
+    .titulo h1 {
+        font-size: 1.75rem;
+    }
+}
+
+/* Extra small screens */
+@media screen and (max-width: 480px) {
+    .titulo_section {
+        height: 120px;
+    }
+
+    .titulo h1 {
+        font-size: 1.5rem;
+    }
+}

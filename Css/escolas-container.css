@@ -1,0 +1,232 @@
+/* Seção de Escolas */
+.escolas-container {
+    max-width: 1200px;
+    margin: 40px auto 0 auto;
+    /* Adiciona margem superior */
+    padding: 20px;
+}
+
+.heading-section {
+    background: #6D1C2C;
+    padding: 30px;
+    border-radius: 15px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.heading-section h1 {
+    font-size: 42px;
+    margin-bottom: 15px;
+    letter-spacing: 1.5px;
+}
+
+.heading-section p {
+    font-size: 19px;
+    opacity: 0.9;
+}
+
+.escolas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    padding: 20px;
+}
+
+.escola-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.escola-card:hover {
+    transform: translateY(-5px);
+}
+
+.escola-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    overflow: hidden;
+    background: #f5f5f5;
+}
+
+.escola-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.escola-nome {
+    color: #6D1C2C;
+    font-size: 19px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.escola-desc {
+    color: #7f8c8d;
+    font-size: 14px;
+    line-height: 1.4;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+    .escolas-container {
+        max-width: 90%;
+        margin: 30px auto;
+    }
+
+    .heading-section h1 {
+        font-size: 35px;
+    }
+
+    .heading-section p {
+        font-size: 18px;
+    }
+
+    .escolas-grid {
+        gap: 25px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 992px) {
+    .heading-section {
+        padding: 25px;
+        margin-bottom: 30px;
+    }
+
+    .heading-section h1 {
+        font-size: 32px;
+        margin-bottom: 12px;
+    }
+
+    .heading-section p {
+        font-size: 16px;
+    }
+
+    .escolas-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+    }
+
+    .escola-card {
+        padding: 15px;
+    }
+
+    .escola-img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 15px;
+    }
+
+    .escola-nome {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .escolas-container {
+        padding: 15px;
+    }
+
+    .heading-section {
+        padding: 20px;
+        margin-bottom: 25px;
+        border-radius: 12px;
+    }
+
+    .heading-section h1 {
+        font-size: 29px;
+        letter-spacing: 1px;
+    }
+
+    .escolas-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        padding: 10px;
+    }
+
+    .escola-card {
+        border-radius: 12px;
+    }
+
+    .escola-nome {
+        font-size: 16px;
+    }
+
+    .escola-desc {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 576px) {
+    .escolas-container {
+        margin: 20px auto;
+        padding: 10px;
+    }
+
+    .heading-section {
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+    }
+
+    .heading-section h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .heading-section p {
+        font-size: 14px;
+    }
+
+    .escolas-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 15px;
+        padding: 5px;
+    }
+
+    .escola-card {
+        padding: 12px;
+        border-radius: 10px;
+    }
+
+    .escola-img {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .escolas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .heading-section h1 {
+        font-size: 21px;
+    }
+
+    .heading-section p {
+        font-size: 13px;
+    }
+
+    .escola-img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .escola-nome {
+        font-size: 15px;
+    }
+
+    .escola-desc {
+        font-size: 13px;
+    }
+}

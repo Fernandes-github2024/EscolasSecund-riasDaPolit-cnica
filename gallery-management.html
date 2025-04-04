@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração da Galeria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!--- Importando icones --->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="Css/preloader.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            padding: 30px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 600;
+            color: #6D1C2C;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 500;
+            color: #6D1C2C;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .subheader {
+            color: #666;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .upload-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .upload-form:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+            font-size: 14px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e1e1e1;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #6D1C2C;
+            box-shadow: 0 0 0 2px rgba(109, 28, 44, 0.2);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .file-input-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .file-input-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f5f5;
+            border: 2px dashed #ddd;
+            border-radius: 6px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-input-label:hover {
+            border-color: #6D1C2C;
+            background-color: #f9f9f9;
+        }
+
+        .file-input-label span {
+            font-weight: 500;
+            color: #666;
+        }
+
+        .file-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-preview {
+            display: none;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .file-preview img {
+            max-height: 200px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .submit-btn {
+            padding: 12px 24px;
+            background-color: #6D1C2C;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #531522;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .gallery-filters {
+            display: flex;
+            gap: 10px;
+        }
+
+        .gallery-filters select {
+            padding: 8px 12px;
+            border: 1px solid #e1e1e1;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .gallery-empty {
+            grid-column: span 3;
+            text-align: center;
+            padding: 60px 0;
+            color: #7f8c8d;
+            font-style: italic;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .gallery-item {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-image {
+            position: relative;
+            padding-top: 66.67%;
+            /* 3:2 aspect ratio */
+            overflow: hidden;
+        }
+
+        .gallery-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-image img {
+            transform: scale(1.05);
+        }
+
+        .gallery-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .gallery-description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .gallery-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+
+        .delete-btn {
+            padding: 10px 15px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .edit-btn {
+            padding: 10px 15px;
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .edit-btn:hover {
+            background-color: #d35400;
+        }
+
+
+        /*Extelização do botão de ver página de galeria*/
+        .view-gallery-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .view-gallery-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background-color: #6D1C2C;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(109, 28, 44, 0.2);
+        }
+
+        .view-gallery-btn:hover {
+            background-color: #531522;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(109, 28, 44, 0.3);
+        }
+
+        .view-gallery-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Media Queries */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-empty {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            .upload-form {
+                padding: 20px;
+            }
+
+            .gallery-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-empty {
+                grid-column: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .edit-btn,
+            .delete-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="book">
+                <div class="page"></div>
+                <div class="page"></div>
+                <div class="page"></div>
+            </div>
+            <div class="circle-spinner"></div>
+            <div class="education-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="loader-text">Carregando</div>
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+        <div class="floating-elements">
+            <i class="fas fa-pencil-alt"></i>
+            <i class="fas fa-book"></i>
+            <i class="fas fa-calculator"></i>
+            <i class="fas fa-atom"></i>
+            <i class="fas fa-globe-africa"></i>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <header>
+            <h1>Administração da Galeria</h1>
+            <p class="subheader">Adicione, edite e gerencie imagens da galeria do site</p>
+        </header>
+
+        <div class="view-gallery-container">
+            <a href="galeria_Fotos.html" class="view-gallery-btn">
+                <span>Ver Galeria no Site</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+            </a>
+        </div>
+
+        <form id="galleryForm" class="upload-form">
+            <div class="form-group">
+                <label for="imageTitle">Título da Imagem</label>
+                <input type="text" id="imageTitle" placeholder="Informe um título para a imagem" required>
+            </div>
+
+            <div class="form-group">
+                <label for="imageDescription">Descrição da Imagem</label>
+                <textarea id="imageDescription" placeholder="Descreva a imagem em detalhes" rows="3"
+                    required></textarea>
+            </div>
+
+            <div class="file-input-container">
+                <label for="imageFile" class="file-input-label">
+                    <span id="fileLabel">Selecione ou arraste uma imagem</span>
+                </label>
+                <input type="file" id="imageFile" class="file-input" accept="image/*" required>
+                <div id="filePreview" class="file-preview">
+                    <img id="previewImage" src="" alt="Preview">
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Adicionar à Galeria</button>
+        </form>
+
+        <div class="gallery-header">
+            <h2>Galeria de Imagens</h2>
+            <div class="gallery-filters">
+                <select id="sortGallery">
+                    <option value="newest">Mais recentes</option>
+                    <option value="oldest">Mais antigas</option>
+                    <option value="az">A-Z</option>
+                    <option value="za">Z-A</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="galleryGrid" class="gallery-grid">
+            <div id="emptyGallery" class="gallery-empty">
+                Nenhuma imagem adicionada à galeria.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Initialize Supabase client
+            const supabaseUrl = 'https://xtwwjzlusdjfxnexisku.supabase.co';
+            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh0d3dqemx1c2RqZnhuZXhpc2t1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI0NzAwNzEsImV4cCI6MjA1ODA0NjA3MX0.TZS2RLMUAwxuIFzHWT5Cx58pd0N84slfhVjWMdSNKC4';
+
+            // Função para inicializar o cliente Supabase
+            function supabaseCreateClient(supabaseUrl, supabaseKey) {
+                return window.supabase.createClient(supabaseUrl, supabaseKey);
+            }
+
+            const supabase = supabaseCreateClient(supabaseUrl, supabaseKey);
+
+            class GalleryManager {
+                constructor() {
+                    this.galleryItems = [];
+                    this.galleryGrid = document.getElementById('galleryGrid');
+                    this.emptyGallery = document.getElementById('emptyGallery');
+                    this.fileInput = document.getElementById('imageFile');
+                    this.fileLabel = document.getElementById('fileLabel');
+                    this.filePreview = document.getElementById('filePreview');
+                    this.previewImage = document.getElementById('previewImage');
+                    this.sortSelect = document.getElementById('sortGallery');
+                    this.currentEditId = null;
+
+                    // Event listeners
+                    document.getElementById('galleryForm').addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        this.addImage();
+                    });
+
+                    this.fileInput.addEventListener('change', (e) => {
+                        this.handleFileSelect(e);
+                    });
+
+                    this.sortSelect.addEventListener('change', () => {
+                        this.renderGallery();
+                    });
+
+                    // Load gallery from Supabase
+                    this.loadGalleryFromSupabase();
+                }
+
+                async loadGalleryFromSupabase() {
+                    try {
+                        const { data, error } = await supabase
+                            .from('gallery')
+                            .select('*');
+
+                        if (error) {
+                            console.error('Error fetching gallery:', error);
+                            alert('Erro ao carregar galeria: ' + error.message);
+                            return;
+                        }
+
+                        this.galleryItems = data || [];
+                        this.renderGallery();
+                    } catch (err) {
+                        console.error('Failed to load gallery:', err);
+                        alert('Falha ao carregar galeria: ' + err.message);
+                    }
+                }
+
+                handleFileSelect(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        this.fileLabel.textContent = file.name;
+
+                        // Check file size and type
+                        if (file.size > 5 * 1024 * 1024) {
+                            alert('O arquivo é muito grande. Tamanho máximo: 5MB');
+                            this.fileInput.value = '';
+                            return;
+                        }
+
+                        const reader = new FileReader();
+                        reader.onload = (event) => {
+                            this.previewImage.src = event.target.result;
+                            this.filePreview.style.display = 'block';
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        this.fileLabel.textContent = 'Selecione ou arraste uma imagem';
+                        this.filePreview.style.display = 'none';
+                    }
+                }
+
+                async addImage() {
+                    const title = document.getElementById('imageTitle').value.trim();
+                    const description = document.getElementById('imageDescription').value.trim();
+                    const file = this.fileInput.files[0];
+
+                    if (!title || !description) {
+                        alert('Por favor, preencha todos os campos obrigatórios.');
+                        return;
+                    }
+
+                    if (!this.currentEditId && !file) {
+                        alert('Por favor, selecione uma imagem.');
+                        return;
+                    }
+
+                    const submitBtn = document.querySelector('.submit-btn');
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = this.currentEditId ? "Atualizando..." : "Adicionando...";
+
+                    try {
+                        let imagePath = '';
+
+                        // If there's a file, upload it to Supabase Storage
+                        if (file) {
+                            const fileExt = file.name.split('.').pop();
+                            const fileName = `${Date.now()}.${fileExt}`;
+
+                            // Upload to Supabase Storage
+                            const { data, error } = await supabase.storage
+                                .from('gallery-images')
+                                .upload(fileName, file);
+
+                            if (error) {
+                                throw new Error('Erro ao fazer upload da imagem: ' + error.message);
+                            }
+
+                            // Get public URL
+                            const { data: urlData } = supabase.storage
+                                .from('gallery-images')
+                                .getPublicUrl(fileName);
+
+                            imagePath = urlData.publicUrl;
+                        } else if (this.currentEditId && this.previewImage.src) {
+                            // Use existing image if in edit mode
+                            const existingItem = this.galleryItems.find(item => item.id === this.currentEditId);
+                            if (existingItem) {
+                                imagePath = existingItem.image;
+                            }
+                        }
+
+                        const timestamp = Date.now();
+
+                        // Dados para enviar ao banco de dados
+                        const galleryItemForDB = {
+                            title,
+                            description,
+                            image: imagePath,
+                            timestamp
+                        };
+
+                        if (this.currentEditId) {
+                            // Update existing record
+                            const { error } = await supabase
+                                .from('gallery')
+                                .update(galleryItemForDB)
+                                .eq('id', this.currentEditId);
+
+                            if (error) throw error;
+
+                            alert('Imagem atualizada com sucesso!');
+                            // Reset edit mode
+                            this.currentEditId = null;
+                            submitBtn.textContent = "Adicionar à Galeria";
+                        } else {
+                            // Create new record
+                            const { error } = await supabase
+                                .from('gallery')
+                                .insert([galleryItemForDB]);
+
+                            if (error) throw error;
+
+                            alert('Imagem adicionada com sucesso!');
+                        }
+
+                        // Reload gallery from database
+                        await this.loadGalleryFromSupabase();
+
+                        // Reset form
+                        document.getElementById('galleryForm').reset();
+                        this.fileLabel.textContent = 'Selecione ou arraste uma imagem';
+                        this.filePreview.style.display = 'none';
+                        // Restaurar o required do campo de imagem
+                        this.fileInput.setAttribute('required', '');
+
+                    } catch (error) {
+                        console.error('Error saving image:', error);
+                        alert('Erro ao salvar imagem: ' + error.message);
+                    } finally {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = this.currentEditId ? "Atualizar Imagem" : "Adicionar à Galeria";
+                    }
+                }
+
+                renderGallery() {
+                    // Clear gallery grid except empty message
+                    const items = this.galleryGrid.querySelectorAll('.gallery-item');
+                    items.forEach(item => item.remove());
+
+                    // Filter and sort gallery items
+                    let filteredItems = [...this.galleryItems];
+
+                    // Sort gallery
+                    const sortValue = this.sortSelect.value;
+                    switch (sortValue) {
+                        case 'newest':
+                            filteredItems.sort((a, b) => b.timestamp - a.timestamp);
+                            break;
+                        case 'oldest':
+                            filteredItems.sort((a, b) => a.timestamp - b.timestamp);
+                            break;
+                        case 'az':
+                            filteredItems.sort((a, b) => a.title.localeCompare(b.title));
+                            break;
+                        case 'za':
+                            filteredItems.sort((a, b) => b.title.localeCompare(a.title));
+                            break;
+                    }
+
+                    // Show or hide empty message
+                    if (filteredItems.length === 0) {
+                        this.emptyGallery.style.display = 'block';
+                    } else {
+                        this.emptyGallery.style.display = 'none';
+
+                        // Add each gallery item
+                        filteredItems.forEach(item => {
+                            const galleryItem = document.createElement('div');
+                            galleryItem.classList.add('gallery-item');
+
+                            // Verifica se a imagem existe
+                            const imageUrl = item.image || 'https://via.placeholder.com/800x450?text=Imagem+não+disponível';
+
+                            galleryItem.innerHTML = `
+                                <div class="gallery-image">
+                                    <img src="${imageUrl}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/800x450?text=Erro+ao+carregar'">
+                                </div>
+                                <div class="gallery-content">
+                                    <h3 class="gallery-title">${item.title}</h3>
+                                    <p class="gallery-description">${item.description.length > 100 ?
+                                    item.description.substring(0, 100) + '...' :
+                                    item.description}</p>
+                                    <div class="gallery-actions">
+                                        <button class="edit-btn" data-id="${item.id}">Editar</button>
+                                        <button class="delete-btn" data-id="${item.id}">Excluir</button>
+                                    </div>
+                                </div>
+                            `;
+
+                            // Add event listeners to buttons
+                            galleryItem.querySelector('.delete-btn').addEventListener('click', () => {
+                                this.deleteImage(item.id);
+                            });
+
+                            galleryItem.querySelector('.edit-btn').addEventListener('click', () => {
+                                this.editImage(item);
+                            });
+
+                            // Insert before empty message
+                            this.galleryGrid.appendChild(galleryItem);
+                        });
+                    }
+                }
+
+                async deleteImage(id) {
+                    if (confirm('Tem certeza que deseja excluir esta imagem?')) {
+                        try {
+                            // Get the gallery item to delete
+                            const itemToDelete = this.galleryItems.find(item => item.id === id);
+
+                            if (itemToDelete && itemToDelete.image) {
+                                // Extract filename from URL
+                                const imagePath = itemToDelete.image.split('/').pop();
+
+                                // Delete image from storage if it exists
+                                const { error: storageError } = await supabase.storage
+                                    .from('gallery-images')
+                                    .remove([imagePath]);
+
+                                if (storageError) {
+                                    console.warn('Erro ao excluir imagem:', storageError);
+                                    // Continua mesmo com erro na exclusão da imagem
+                                }
+                            }
+
+                            // Delete record from database
+                            const { error } = await supabase
+                                .from('gallery')
+                                .delete()
+                                .eq('id', id);
+
+                            if (error) throw error;
+
+                            alert('Imagem excluída com sucesso!');
+                            // Reload gallery
+                            await this.loadGalleryFromSupabase();
+                        } catch (error) {
+                            console.error('Error deleting image:', error);
+                            alert('Erro ao excluir imagem: ' + error.message);
+                        }
+                    }
+                }
+
+                editImage(item) {
+                    // Fill form with image data
+                    document.getElementById('imageTitle').value = item.title;
+                    document.getElementById('imageDescription').value = item.description;
+
+                    // Show image preview
+                    this.previewImage.src = item.image;
+                    this.filePreview.style.display = 'block';
+                    this.fileLabel.textContent = 'Imagem atual (selecione para alterar)';
+
+                    // Tornar o campo de imagem opcional durante a edição
+                    this.fileInput.removeAttribute('required');
+
+                    // Set edit mode
+                    this.currentEditId = item.id;
+                    document.querySelector('.submit-btn').textContent = "Atualizar Imagem";
+
+                    // Scroll to form
+                    document.querySelector('.upload-form').scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+
+            // Initialize the gallery manager
+            window.galleryManager = new GalleryManager();
+        });
+    </script>
+    <script src="JavaScript/preloader.js"></script>
+</body>
+
+</html>

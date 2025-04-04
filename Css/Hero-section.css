@@ -1,0 +1,168 @@
+.slider {
+    position: relative;
+    max-width: 100%;
+    height: 600px;
+    background: #000;
+}
+
+.slider-track {
+    position: relative;
+    height: 100%;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    filter: brightness(70%);
+    object-fit: cover;
+}
+
+.slider-nav {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 1;
+}
+
+.slide-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 42px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
+}
+
+.year {
+    color: #FFD700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.nav-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    border: none;
+    padding: 0;
+}
+
+.nav-dot.active {
+    background: #fff;
+}
+
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    padding: 16px;
+    cursor: pointer;
+    border: none;
+    z-index: 1;
+    font-size: 18px;
+    transition: background 0.3s;
+}
+
+.slider-btn:hover {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
+
+
+
+/* Media Queries */
+@media screen and (max-width: 1024px) {
+    .slider {
+        height: 500px;
+    }
+
+    .slide-text {
+        font-size: 36px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .slider {
+        height: 400px;
+    }
+
+    .slide-text {
+        font-size: 28px;
+    }
+
+    .slider-btn {
+        padding: 12px;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .slider {
+        height: 300px;
+    }
+
+    .slide-text {
+        font-size: 22px;
+        width: 90%;
+        white-space: normal;
+        /* Allow text to wrap on mobile */
+    }
+
+    .slider-btn {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .nav-dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    .slider-nav {
+        bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .slider {
+        height: 250px;
+    }
+
+    .slide-text {
+        font-size: 18px;
+    }
+
+    .slider-btn {
+        padding: 6px;
+        font-size: 12px;
+    }
+}

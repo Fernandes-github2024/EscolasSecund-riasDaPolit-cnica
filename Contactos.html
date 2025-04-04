@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="Pt-Br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Css/Nav.css">
+    <link rel="stylesheet" href="Css/Universal.css">
+    <link rel="stylesheet" href="Css/Footer.css">
+    <link rel="stylesheet" href="Css/preloader.css">
+
+
+    <!--- Links posteriores --->
+    <link rel="stylesheet" href="Css/Contactos.css">
+
+    <!--- Importando fontes Poppins --->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+    <!--- Importando fontes Montserrat --->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lobster&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+    <!--- Importando icones --->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <title>Contactos - Escolas Secundárias D'A Politécnica</title>
+</head>
+
+<body>
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="book">
+                <div class="page"></div>
+                <div class="page"></div>
+                <div class="page"></div>
+            </div>
+            <div class="circle-spinner"></div>
+            <div class="education-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="loader-text">Carregando</div>
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+        <div class="floating-elements">
+            <i class="fas fa-pencil-alt"></i>
+            <i class="fas fa-book"></i>
+            <i class="fas fa-calculator"></i>
+            <i class="fas fa-atom"></i>
+            <i class="fas fa-globe-africa"></i>
+        </div>
+    </div>
+
+
+    <!------------------------------------------------Nav section(HEADER)--------------------------------------------------->
+    <div class="Contact-section">
+        <div class="Contact">
+            <div class="Contact-itens">
+                <div class="Email">
+                    <i class="bi bi-envelope-fill"></i>
+                    <Span>infopolitecnica@gmail.com</Span>
+                </div>
+                <div class="academic-calendar">
+                    <i class="bi bi-calendar-event"></i>
+                    <span>Período Lectivo 2025</span>
+                </div>
+                <div class="btn-contact">
+                    <a href="#">Inscreva-se</a>
+                </div>
+            </div>
+            <div class="Contact-Links">
+                <a href="#" title="Siga-nos no Facebook"><i class="bi bi-instagram"></i></a>
+                <a href="#" title="Canal no YouTube"><i class="bi bi-youtube"></i></a>
+                <a href="#" title="Contato WhatsApp"><i class="bi bi-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+    <!---Menu De Navegação Desktop--->
+    <div class="Nav-Section">
+        <div class="Nav-Bar">
+            <div class="logo-nav">
+                <a href="index.html">
+                    <img width="100" src="Img/logo.jpg" alt="logo">
+                </a>
+            </div>
+            <div class="links">
+                <a href="index.html">Ínicio</a>
+                <a href="https://estudante.apolitecnica.ac.mz/steps/personal">Pré-Inscrição</a>
+                <div class="dropdown">
+                    <a href="#">Eventos ▾</a>
+                    <div class="dropdown-content">
+                        <a href="Notícias.html">Notícias</a>
+                        <a href="Agenda.html">Agenda</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#">Galeria ▾</a>
+                    <div class="dropdown-content">
+                        <a href="galeria_Quadro.html">Quadro de Honra</a>
+                        <a href="galeria_Fotos.html">Fotos</a>
+                        <a href="galeria_Videos.html">Videos</a>
+                    </div>
+                </div>
+            </div>
+            <div class="Nav-btn">
+                <a href="Contactos.html">Contactos</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu HTML Fix -->
+    <div class="mobile-menu">
+        <div class="menu-btn">
+            <div class="logo"><img src="Img/logo.jpg" alt="Logo"> </div>
+            <button onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+        </div>
+        <button class="close-button" id="close-button" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
+        <nav class="menu-overlay" id="menu">
+            <a href="index.html">Ínicio</a>
+            <a href="https://estudante.apolitecnica.ac.mz/steps/personal">Pré-Inscrição</a>
+            <div class="mobile-menu-item" id="mobile-eventos-menu">
+                <a href="#">Eventos</a>
+                <div class="mobile-submenu" id="submenu-eventos">
+                    <a href="Notícias.html">Notícias</a>
+                    <a href="Agenda.html">Agenda</a>
+                </div>
+            </div>
+            <div class="mobile-menu-item" id="mobile-galeria-menu">
+                <a href="#">Galeria</a>
+                <div class="mobile-submenu" id="submenu-galeria-mobile">
+                    <a href="galeria_Quadro.html">Quadro de Honra</a>
+                    <a href="galeria_Fotos.html">Fotos</a>
+                    <a href="galeria_Videos.html">Vídeos</a>
+                </div>
+            </div>
+            <a href="Contactos.html">Contactos</a>
+        </nav>
+    </div>
+
+
+    <!-------------------------------------------------------------(Main)---------------------------------------------------------------->
+    <div class="titulo_section">
+        <div class="titulo">
+            <h1>Contactos</h1>
+        </div>
+    </div>
+
+    <!-- Seção principal de contatos -->
+    <div class="contacts-container">
+        <div class="contact-intro">
+            <h2>Nossas Unidades</h2>
+            <p>Entre em contato com uma de nossas escolas para obter mais informações sobre os nossos cursos, processos
+                de inscrição ou qualquer outra dúvida.</p>
+        </div>
+
+        <!-- Grade de cartões de localização -->
+        <div class="locations-grid">
+            <div class="location-card">
+                <h2>MAPUTO</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <p>Av. Paulo Samuel Kankhomba, n.º 1011</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-telephone-fill"></i>
+                        <p>+258 21 352 750</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-printer-fill"></i>
+                        <p>+258 21 352 701</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-phone-fill"></i>
+                        <p>+258 82 3585250 | 82 3133700 | 82 3126180</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-envelope-fill"></i>
+                        <p>maputo@politecnica.ac.mz</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <h2>QUELIMANE</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <p>Av. Samora Machel, n.º 362 Quelimane – Moçambique</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-telephone-fill"></i>
+                        <p>+258 24 213 118</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-printer-fill"></i>
+                        <p>+258 24 214 060</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-phone-fill"></i>
+                        <p>+258 825096310</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-envelope-fill"></i>
+                        <p>quelimane@politecnica.ac.mz</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <h2>NAMPULA</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <p>Bairro de Murapaniwa, Natikire</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-telephone-fill"></i>
+                        <p>+258 26 240 370</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-printer-fill"></i>
+                        <p>+258 26 240 372</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-phone-fill"></i>
+                        <p>+258 82 304 7483</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-envelope-fill"></i>
+                        <p>nampula@politecnica.ac.mz</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <h2>NACALA</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <p>Bairro de Ontupaia, Nacala-Porto</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-telephone-fill"></i>
+                        <p>+258 26 526 414</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-envelope-fill"></i>
+                        <p>nacala@politecnica.ac.mz</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="location-card">
+                <h2>TETE</h2>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <p>Bairro Matundo, Unidade Nsonha</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-telephone-fill"></i>
+                        <p>+258 25 22015</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-printer-fill"></i>
+                        <p>+258 25 22016</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-phone-fill"></i>
+                        <p>+258 82 2813003</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="bi bi-envelope-fill"></i>
+                        <p>tete@politecnica.ac.mz</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mapa interativo -->
+        <div class="map-section">
+            <h2>Encontre-nos no Mapa</h2>
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3587.7351837538787!2d32.585174674884386!3d-25.956773077868967!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ee69e7c517e8131%3A0x4c515939f54aec33!2sUniversidade%20Polit%C3%A9cnica!5e0!3m2!1spt-PT!2smz!4v1724902553872!5m2!1spt-PT!2smz"
+                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+
+    </div>
+
+    <!-------------Secção do rodapé(FOOTER)------------>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="Img/logo_Grupo_Politecnico.png" alt="Logo da Empresa">
+            </div>
+            <p>&copy; 2025 - Todos os direitos reservados</p>
+            <a href="Admin_Form.html" class="admin-link">Área Administrativa</a>
+        </div>
+    </footer>
+
+
+    <script src="JavaScript/Contactos.js"></script>
+    <script src="JavaScript/preloader.js"></script>
+
+    <!-- Media Queries for contacts container -->
+    <style>
+        /* Base styles for contacts container */
+        .contacts-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            margin-bottom: 80px;
+        }
+
+        @media (max-width: 1200px) {
+            .contacts-container {
+                max-width: 100%;
+                padding: 0 20px;
+                margin-bottom: 40px;
+            }
+
+            .locations-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .contact-intro {
+                padding: 0 10px;
+            }
+
+            .contact-intro h2 {
+                font-size: 28px;
+            }
+
+            .contact-intro p {
+                font-size: 15px;
+            }
+
+            .location-card {
+                padding: 20px;
+            }
+
+            .location-card h2 {
+                font-size: 20px;
+            }
+
+            .contact-item {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contacts-container {
+                padding: 0 10px;
+                margin: 0 10px;
+                margin-bottom: 30px;
+            }
+
+            .locations-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .contact-intro h2 {
+                font-size: 24px;
+            }
+
+            .contact-intro p {
+                font-size: 14px;
+            }
+
+            .location-card {
+                padding: 15px;
+            }
+
+            .location-card h2 {
+                font-size: 18px;
+                margin-bottom: 12px;
+            }
+
+            .contact-item {
+                font-size: 13px;
+                margin-bottom: 8px;
+            }
+
+            .contact-item i {
+                font-size: 16px;
+            }
+
+            .map-section {
+                margin-top: 30px;
+            }
+
+            .map-section h2 {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+
+            .map-container iframe {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contacts-container {
+                padding: 0 10px;
+                margin: 0 10px;
+                margin-bottom: 30px;
+            }
+
+            .locations-grid {
+                gap: 30px;
+            }
+
+            .contact-intro {
+                padding: 0 10px;
+            }
+
+            .contact-intro h2 {
+                font-size: 22px;
+            }
+
+            .contact-intro p {
+                font-size: 13px;
+            }
+
+            .location-card {
+                padding: 12px;
+            }
+
+            .location-card h2 {
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
+
+            .contact-item {
+                font-size: 12px;
+                margin-bottom: 6px;
+            }
+
+            .contact-item i {
+                font-size: 14px;
+            }
+
+            .map-section {
+                margin-top: 25px;
+            }
+
+            .map-section h2 {
+                font-size: 18px;
+                margin-bottom: 12px;
+            }
+
+            .map-container iframe {
+                height: 300px;
+            }
+        }
+    </style>
+</body>
+
+</html>

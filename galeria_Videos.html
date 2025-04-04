@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="Pt-Br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Css/Nav.css">
+    <link rel="stylesheet" href="Css/Universal.css">
+    <link rel="stylesheet" href="Css/Footer.css">
+    <link rel="stylesheet" href="Css/preloader.css">
+
+
+    <!--- Links secção compartilhada da galeria --->
+    <link rel="stylesheet" href="Css/Galeria.css">
+
+    <!--- Importando fontes Poppins --->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+    <!--- Importando fontes Montserrat --->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lobster&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+    <!--- Importando icones --->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <title>Galeria - Escolas Secundárias D'A Politécnica</title>
+</head>
+
+<body>
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="book">
+                <div class="page"></div>
+                <div class="page"></div>
+                <div class="page"></div>
+            </div>
+            <div class="circle-spinner"></div>
+            <div class="education-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="loader-text">Carregando</div>
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+        <div class="floating-elements">
+            <i class="fas fa-pencil-alt"></i>
+            <i class="fas fa-book"></i>
+            <i class="fas fa-calculator"></i>
+            <i class="fas fa-atom"></i>
+            <i class="fas fa-globe-africa"></i>
+        </div>
+    </div>
+
+
+    <!------------------------------------------------Nav section(HEADER)--------------------------------------------------->
+    <div class="Contact-section">
+        <div class="Contact">
+            <div class="Contact-itens">
+                <div class="Email">
+                    <i class="bi bi-envelope-fill"></i>
+                    <Span>infopolitecnica@gmail.com</Span>
+                </div>
+                <div class="academic-calendar">
+                    <i class="bi bi-calendar-event"></i>
+                    <span>Período Lectivo 2025</span>
+                </div>
+                <div class="btn-contact">
+                    <a href="#">Inscreva-se</a>
+                </div>
+            </div>
+            <div class="Contact-Links">
+                <a href="#" title="Siga-nos no Facebook"><i class="bi bi-instagram"></i></a>
+                <a href="#" title="Canal no YouTube"><i class="bi bi-youtube"></i></a>
+                <a href="#" title="Contato WhatsApp"><i class="bi bi-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+    <!---Menu De Navegação Desktop--->
+    <div class="Nav-Section">
+        <div class="Nav-Bar">
+            <div class="logo-nav">
+                <a href="index.html">
+                    <img width="100" src="Img/logo.jpg" alt="logo">
+                </a>
+            </div>
+            <div class="links">
+                <a href="index.html">Ínicio</a>
+                <a href="https://estudante.apolitecnica.ac.mz/steps/personal">Pré-Inscrição</a>
+                <div class="dropdown">
+                    <a href="#">Eventos ▾</a>
+                    <div class="dropdown-content">
+                        <a href="Notícias.html">Notícias</a>
+                        <a href="Agenda.html">Agenda</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="#">Galeria ▾</a>
+                    <div class="dropdown-content">
+                        <a href="galeria_Quadro.html">Quadro de Honra</a>
+                        <a href="galeria_Fotos.html">Fotos</a>
+                        <a href="galeria_Videos.html">Videos</a>
+                    </div>
+                </div>
+            </div>
+            <div class="Nav-btn">
+                <a href="Contactos.html">Contactos</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu HTML Fix -->
+    <div class="mobile-menu">
+        <div class="menu-btn">
+            <div class="logo"><img src="Img/logo.jpg" alt="Logo"> </div>
+            <button onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+        </div>
+        <button class="close-button" id="close-button" onclick="toggleMenu()"><i class="fas fa-times"></i></button>
+        <nav class="menu-overlay" id="menu">
+            <a href="index.html">Ínicio</a>
+            <a href="https://estudante.apolitecnica.ac.mz/steps/personal">Pré-Inscrição</a>
+            <div class="mobile-menu-item" id="mobile-eventos-menu">
+                <a href="#">Eventos</a>
+                <div class="mobile-submenu" id="submenu-eventos">
+                    <a href="Notícias.html">Notícias</a>
+                    <a href="Agenda.html">Agenda</a>
+                </div>
+            </div>
+            <div class="mobile-menu-item" id="mobile-galeria-menu">
+                <a href="#">Galeria</a>
+                <div class="mobile-submenu" id="submenu-galeria-mobile">
+                    <a href="galeria_Quadro.html">Quadro de Honra</a>
+                    <a href="galeria_Fotos.html">Fotos</a>
+                    <a href="galeria_Videos.html">Vídeos</a>
+                </div>
+            </div>
+            <a href="Contactos.html">Contactos</a>
+        </nav>
+    </div>
+
+
+    <!-------------------------------------------------------------(Main)---------------------------------------------------------------->
+    <div class="titulo_section">
+        <div class="titulo">
+            <h1>Vídeos</h1>
+        </div>
+    </div>
+
+
+    <section class="video-section">
+        <div class="container">
+            <div class="construction-message">
+                <i class="fas fa-tools"></i>
+                <h2>Em Construção</h2>
+                <p>Estamos trabalhando para trazer novidades em breve. Fique atento!</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-------------Secção do rodapé(FOOTER)------------>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="Img/logo_Grupo_Politecnico.png" alt="Logo da Empresa">
+            </div>
+            <p>&copy; 2025 - Todos os direitos reservados</p>
+            <a href="Admin_Form.html" class="admin-link">Área Administrativa</a>
+        </div>
+    </footer>
+
+
+
+    <script src="JavaScript/Galeria.js"></script>
+    <script src="JavaScript/preloader.js"></script>
+</body>
+
+</html>

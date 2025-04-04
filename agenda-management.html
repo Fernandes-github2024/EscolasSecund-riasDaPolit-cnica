@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração da Agenda Escolar</title>
+    <!-- Importação da fonte Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!--- Importando icones --->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="Css/preloader.css">
+    <!-- Adicionar Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            padding: 30px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 40px;
+        }
+
+        .admin-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 32px;
+        }
+
+        .add-event-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .add-event-form:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .add-event-form h3 {
+            margin-bottom: 20px;
+            color: #3498db;
+            font-weight: 500;
+            font-size: 24px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-control {
+            width: 100%;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        .add-event-form label {
+            display: block;
+            margin: 8px 0;
+            font-weight: 500;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .add-event-form input,
+        .add-event-form select,
+        .add-event-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #e1e1e1;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .add-event-form input:focus,
+        .add-event-form select:focus,
+        .add-event-form textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        .add-event-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .add-event-form button {
+            padding: 12px 24px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .add-event-form button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .events-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .events-header h3 {
+            color: #2c3e50;
+            font-weight: 500;
+            font-size: 24px;
+        }
+
+        .event-filters {
+            display: flex;
+            gap: 10px;
+        }
+
+        .event-filters select {
+            padding: 8px 12px;
+            border: 1px solid #e1e1e1;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+        }
+
+        .event-list {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .event-list-empty {
+            text-align: center;
+            padding: 40px 0;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .event-item {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border-left: 5px solid #3498db;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .event-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-item.academicos {
+            border-left-color: #3498db;
+            /* Azul para eventos acadêmicos */
+        }
+
+        .event-item.culturais {
+            border-left-color: #e74c3c;
+            /* Vermelho para eventos culturais */
+        }
+
+        .event-item.desportivos {
+            border-left-color: #2ecc71;
+            /* Verde para eventos desportivos */
+        }
+
+        .event-item h4 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .event-item p {
+            margin: 8px 0;
+            font-size: 14px;
+        }
+
+        .event-meta {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .event-actions {
+            text-align: right;
+            margin-top: 15px;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .edit-btn {
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .edit-btn:hover {
+            background-color: #d35400;
+        }
+
+        .type-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            color: white;
+            margin-left: 10px;
+        }
+
+        .type-badge.academicos {
+            background-color: #3498db;
+        }
+
+        .type-badge.culturais {
+            background-color: #e74c3c;
+        }
+
+        .type-badge.desportivos {
+            background-color: #2ecc71;
+        }
+
+
+
+        /*Extelização do botão de ver página de agenda*/
+        .view-gallery-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .view-gallery-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(109, 28, 44, 0.2);
+        }
+
+        .view-gallery-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(109, 28, 44, 0.3);
+        }
+
+        .view-gallery-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Media Queries */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: span 1;
+            }
+
+            .event-meta {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+                overflow-x: hidden;
+            }
+
+            .container {
+                padding: 0 10px;
+            }
+
+            .add-event-form,
+            .event-list {
+                padding: 20px;
+            }
+
+            .events-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .event-meta {
+                grid-template-columns: 1fr;
+            }
+
+            .event-filters {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .event-filters select {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 0 5px;
+            }
+
+            .admin-section h2 {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+
+            .add-event-form h3,
+            .events-header h3 {
+                font-size: 20px;
+            }
+
+            .event-actions {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .edit-btn {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            .view-gallery-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="book">
+                <div class="page"></div>
+                <div class="page"></div>
+                <div class="page"></div>
+            </div>
+            <div class="circle-spinner"></div>
+            <div class="education-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="loader-text">Carregando</div>
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+        <div class="floating-elements">
+            <i class="fas fa-pencil-alt"></i>
+            <i class="fas fa-book"></i>
+            <i class="fas fa-calculator"></i>
+            <i class="fas fa-atom"></i>
+            <i class="fas fa-globe-africa"></i>
+        </div>
+    </div>
+
+
+    <section class="admin-section">
+        <div class="container">
+            <header>
+                <h2>Administração da Agenda Escolar</h2>
+            </header>
+
+            <div class="view-gallery-container">
+                <a href="Agenda.html" class="view-gallery-btn">
+                    <span>Ver Agenda no Site</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Formulário para Adicionar Evento -->
+            <div class="add-event-form">
+                <h3>Adicionar Evento</h3>
+                <form id="add-event-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="event-title">Título do Evento:</label>
+                            <input type="text" id="event-title" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="event-type">Tipo de Evento:</label>
+                            <select id="event-type" class="form-control" required>
+                                <option value="academicos">Acadêmico</option>
+                                <option value="culturais">Cultural</option>
+                                <option value="desportivos">Desportivo</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="event-escola">Escola:</label>
+                            <select id="event-escola" class="form-control" required>
+                                <option value="todas">Todas as Escolas</option>
+                                <option value="maputo">Acácias (Maputo)</option>
+                                <option value="quelimane">Lourenço do Rosário (Quelimane)</option>
+                                <option value="tete">Embondeiros (Tete)</option>
+                                <option value="nampula">D'A Politécnica (Nampula)</option>
+                                <option value="nacala">D'A Politécnica (Nacala)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="event-location">Local Específico:</label>
+                            <input type="text" id="event-location" class="form-control"
+                                placeholder="Ex: Auditório, Quadra, etc." required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="event-date">Data:</label>
+                            <input type="date" id="event-date" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="event-time">Horário:</label>
+                            <input type="time" id="event-time" class="form-control" required>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="event-description">Descrição:</label>
+                            <textarea id="event-description" class="form-control" required></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <button type="submit" id="submit-btn">Adicionar Evento</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Lista de Eventos -->
+            <div class="events-header">
+                <h3>Eventos Cadastrados</h3>
+                <div class="event-filters">
+                    <select id="filter-type">
+                        <option value="todos">Todos os tipos</option>
+                        <option value="academicos">Acadêmicos</option>
+                        <option value="culturais">Culturais</option>
+                        <option value="desportivos">Desportivos</option>
+                    </select>
+                    <select id="filter-escola">
+                        <option value="todos">Todas as escolas</option>
+                        <option value="maputo">Acácias (Maputo)</option>
+                        <option value="quelimane">Lourenço do Rosário (Quelimane)</option>
+                        <option value="tete">Embondeiros (Tete)</option>
+                        <option value="nampula">D'A Politécnica (Nampula)</option>
+                        <option value="nacala">D'A Politécnica (Nacala)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="event-list" id="event-list">
+                <!-- Eventos serão exibidos aqui -->
+                <div class="event-list-empty" id="empty-list">Nenhum evento cadastrado.</div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Initialize Supabase client
+            const supabaseUrl = 'https://xtwwjzlusdjfxnexisku.supabase.co';
+            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh0d3dqemx1c2RqZnhuZXhpc2t1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI0NzAwNzEsImV4cCI6MjA1ODA0NjA3MX0.TZS2RLMUAwxuIFzHWT5Cx58pd0N84slfhVjWMdSNKC4';
+
+            // Função para inicializar o cliente Supabase
+            function supabaseCreateClient(supabaseUrl, supabaseKey) {
+                return window.supabase.createClient(supabaseUrl, supabaseKey);
+            }
+
+            const supabase = supabaseCreateClient(supabaseUrl, supabaseKey);
+
+            // Elementos DOM
+            const addEventForm = document.getElementById('add-event-form');
+            const eventList = document.getElementById('event-list');
+            const emptyList = document.getElementById('empty-list');
+            const filterType = document.getElementById('filter-type');
+            const filterEscola = document.getElementById('filter-escola');
+            const submitBtn = document.getElementById('submit-btn');
+
+            // Mapeamento de escolas
+            const escolasMap = {
+                'maputo': 'Acácias (Maputo)',
+                'quelimane': 'Lourenço do Rosário (Quelimane)',
+                'tete': 'Embondeiros (Tete)',
+                'nampula': 'D\'A Politécnica (Nampula)',
+                'nacala': 'D\'A Politécnica (Nacala)',
+                'todas': 'Todas as Escolas'
+            };
+
+            // Variável para armazenar o ID de evento em edição
+            let currentEditId = null;
+
+            // Carregar eventos do Supabase ao carregar a página
+            await loadEventsFromSupabase();
+
+            // Adicionar evento de filtro
+            filterType.addEventListener('change', filterEvents);
+            filterEscola.addEventListener('change', filterEvents);
+
+            // Função para adicionar/editar evento
+            addEventForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                // Obter valores do formulário
+                const title = document.getElementById('event-title').value.trim();
+                const type = document.getElementById('event-type').value;
+                const escola = document.getElementById('event-escola').value;
+                const date = document.getElementById('event-date').value;
+                const time = document.getElementById('event-time').value;
+                const location = document.getElementById('event-location').value.trim();
+                const description = document.getElementById('event-description').value.trim();
+
+                if (!title || !location || !description) {
+                    alert('Por favor, preencha todos os campos obrigatórios.');
+                    return;
+                }
+
+                // Desabilitar botão durante o processamento
+                submitBtn.disabled = true;
+                submitBtn.textContent = currentEditId ? "Atualizando..." : "Adicionando...";
+
+                try {
+                    // Formatar data para exibição
+                    const dateObj = new Date(date);
+                    const timestamp = Date.now();
+
+                    // Dados para enviar ao banco de dados
+                    const eventData = {
+                        title,
+                        type,
+                        escola,
+                        date,
+                        time,
+                        location,
+                        description,
+                        timestamp
+                    };
+
+                    if (currentEditId) {
+                        // Atualizar evento existente
+                        const { error } = await supabase
+                            .from('agenda')
+                            .update(eventData)
+                            .eq('id', currentEditId);
+
+                        if (error) throw error;
+
+                        alert('Evento atualizado com sucesso!');
+                        // Resetar modo de edição
+                        currentEditId = null;
+                        submitBtn.textContent = "Adicionar Evento";
+                    } else {
+                        // Criar novo evento
+                        const { error } = await supabase
+                            .from('agenda')
+                            .insert([eventData]);
+
+                        if (error) throw error;
+
+                        alert('Evento adicionado com sucesso!');
+                    }
+
+                    // Recarregar eventos do banco de dados
+                    await loadEventsFromSupabase();
+
+                    // Limpar o formulário
+                    addEventForm.reset();
+
+                } catch (error) {
+                    console.error('Erro ao salvar evento:', error);
+                    alert('Erro ao salvar evento: ' + error.message);
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = currentEditId ? "Atualizar Evento" : "Adicionar Evento";
+                }
+            });
+
+            // Função para carregar eventos do Supabase
+            async function loadEventsFromSupabase() {
+                try {
+                    const { data: events, error } = await supabase
+                        .from('agenda')
+                        .select('*');
+
+                    if (error) {
+                        console.error('Erro ao buscar eventos:', error);
+                        alert('Erro ao carregar eventos: ' + error.message);
+                        return;
+                    }
+
+                    // Limpar a lista de eventos
+                    const eventItems = eventList.querySelectorAll('.event-item');
+                    eventItems.forEach(item => item.remove());
+
+                    // Adicionar eventos à lista
+                    if (events && events.length > 0) {
+                        events.forEach(displayEvent);
+                        emptyList.style.display = 'none';
+                    } else {
+                        emptyList.style.display = 'block';
+                    }
+                } catch (err) {
+                    console.error('Falha ao carregar eventos:', err);
+                    alert('Falha ao carregar eventos: ' + err.message);
+                }
+            }
+
+            // Função para exibir eventos na lista
+            function displayEvent(event) {
+                const eventItem = document.createElement('div');
+                eventItem.classList.add('event-item', event.type);
+                eventItem.dataset.type = event.type;
+                eventItem.dataset.escola = event.escola;
+
+                // Formatar data para exibição
+                const formattedDate = new Date(event.date).toLocaleDateString('pt-BR');
+
+                eventItem.innerHTML = `
+                    <h4>${event.title} <span class="type-badge ${event.type}">${getTypeLabel(event.type)}</span></h4>
+                    
+                    <div class="event-meta">
+                        <p><strong>Escola:</strong> ${escolasMap[event.escola]}</p>
+                        <p><strong>Data:</strong> ${formattedDate}</p>
+                        <p><strong>Horário:</strong> ${event.time}</p>
+                    </div>
+                    
+                    <p><strong>Local:</strong> ${event.location}</p>
+                    <p><strong>Descrição:</strong> ${event.description}</p>
+                    
+                    <div class="event-actions">
+                        <button class="edit-btn" data-id="${event.id}">Editar</button>
+                        <button class="delete-btn" data-id="${event.id}">Remover</button>
+                    </div>
+                `;
+
+                // Adicionar evento de remoção
+                const deleteBtn = eventItem.querySelector('.delete-btn');
+                deleteBtn.addEventListener('click', () => {
+                    deleteEvent(event.id);
+                });
+
+                // Adicionar evento de edição
+                const editBtn = eventItem.querySelector('.edit-btn');
+                editBtn.addEventListener('click', () => {
+                    editEvent(event);
+                });
+
+                // Adicionar evento à lista
+                eventList.appendChild(eventItem);
+            }
+
+            // Função para obter o rótulo do tipo de evento
+            function getTypeLabel(type) {
+                const labels = {
+                    'academicos': 'Acadêmico',
+                    'culturais': 'Cultural',
+                    'desportivos': 'Desportivo'
+                };
+                return labels[type] || type;
+            }
+
+            // Função para excluir evento
+            async function deleteEvent(id) {
+                if (confirm('Tem certeza que deseja excluir este evento?')) {
+                    try {
+                        const { error } = await supabase
+                            .from('agenda')
+                            .delete()
+                            .eq('id', id);
+
+                        if (error) throw error;
+
+                        alert('Evento excluído com sucesso!');
+                        // Recarregar eventos
+                        await loadEventsFromSupabase();
+                    } catch (error) {
+                        console.error('Erro ao excluir evento:', error);
+                        alert('Erro ao excluir evento: ' + error.message);
+                    }
+                }
+            }
+
+            // Função para editar evento
+            function editEvent(event) {
+                // Popular formulário com dados do evento para edição
+                document.getElementById('event-title').value = event.title;
+                document.getElementById('event-type').value = event.type;
+                document.getElementById('event-escola').value = event.escola;
+                document.getElementById('event-date').value = event.date;
+                document.getElementById('event-time').value = event.time;
+                document.getElementById('event-location').value = event.location;
+                document.getElementById('event-description').value = event.description;
+
+                // Configurar modo de edição
+                currentEditId = event.id;
+                submitBtn.textContent = "Atualizar Evento";
+
+                // Scroll para o formulário
+                document.querySelector('.add-event-form').scrollIntoView({ behavior: 'smooth' });
+            }
+
+            // Filtrar eventos
+            function filterEvents() {
+                const typeFilter = filterType.value;
+                const escolaFilter = filterEscola.value;
+
+                const eventItems = eventList.querySelectorAll('.event-item');
+
+                eventItems.forEach(item => {
+                    const matchesType = typeFilter === 'todos' || item.dataset.type === typeFilter;
+                    const matchesEscola = escolaFilter === 'todos' || item.dataset.escola === escolaFilter;
+
+                    if (matchesType && matchesEscola) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                // Verificar se a lista está vazia
+                const hasVisibleEvents = Array.from(eventItems).some(item => item.style.display !== 'none');
+                emptyList.style.display = hasVisibleEvents ? 'none' : 'block';
+            }
+        });
+    </script>
+    <script src="JavaScript/preloader.js"></script>
+</body>
+
+</html>
